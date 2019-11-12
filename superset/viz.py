@@ -181,7 +181,7 @@ class BaseViz(object):
         df = self.get_df(query_obj)
         return df.to_dict(orient="records")
 
-    def get_df(self, query_obj=None):
+    def get_df(self, query_obj=None, download=False):
         """Returns a pandas dataframe based on the query object"""
         if not query_obj:
             query_obj = self.query_obj()
@@ -195,6 +195,9 @@ class BaseViz(object):
             dttm_col = self.datasource.get_col(query_obj["granularity"])
             if dttm_col:
                 timestamp_format = dttm_col.python_date_format
+
+        if download:
+            query_obj.pop("row_limit")
 
         # The datasource here can be different backend but the interface is common
         self.results = self.datasource.query(query_obj)
@@ -487,7 +490,7 @@ class BaseViz(object):
         return content
 
     def get_csv(self):
-        df = self.get_df()
+        df = self.get_df(download=True)
         include_index = not isinstance(df.index, pd.RangeIndex)
         return df.to_csv(index=include_index, **config.get("CSV_EXPORT"))
 
