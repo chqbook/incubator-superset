@@ -701,6 +701,7 @@ class PivotTableViz(BaseViz):
             aggfunc=aggfunc,
             margins=self.form_data.get("pivot_margins"),
             dropna=False,
+            fill_value=''
         )
         # Display metrics side by side with each column
         if self.form_data.get("combine_metric"):
