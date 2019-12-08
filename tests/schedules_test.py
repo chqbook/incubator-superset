@@ -372,7 +372,7 @@ class SchedulesTestCase(unittest.TestCase):
         mock_open.return_value = response
         mock_urlopen.return_value = response
         mock_urlopen.return_value.getcode.return_value = 200
-        response.content = self.CSV
+        response.read.return_value = self.CSV
 
         schedule = (
             db.session.query(SliceEmailSchedule)
@@ -398,8 +398,7 @@ class SchedulesTestCase(unittest.TestCase):
         mock_open.return_value = response
         mock_urlopen.return_value = response
         mock_urlopen.return_value.getcode.return_value = 200
-        response.content = self.CSV
-
+        response.read.return_value = self.CSV
         schedule = (
             db.session.query(SliceEmailSchedule)
             .filter_by(id=self.slice_schedule)
