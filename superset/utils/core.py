@@ -1037,7 +1037,6 @@ def get_since_until(
         - Last day
         - Last week
         - Last month
-        - This month
         - Last quarter
         - Last year
         - No filter
@@ -1064,10 +1063,6 @@ def get_since_until(
         "Last month": (
             relative_start - relativedelta(months=1),  # noqa: T400
             relative_end,
-        ),
-        "This month": (
-            relative_start.replace(day=1),  # noqa: T400
-            parse_human_datetime('now') + relativedelta(hours=5, minutes=30)
         ),
         "Last quarter": (
             relative_start - relativedelta(months=3),  # noqa: T400

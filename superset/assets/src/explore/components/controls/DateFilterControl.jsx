@@ -61,7 +61,6 @@ const COMMON_TIME_FRAMES = [
   'Last day',
   'Last week',
   'Last month',
-  'This month',
   'Last quarter',
   'Last year',
   'No filter',
