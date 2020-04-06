@@ -1031,10 +1031,11 @@ def get_since_until(
         - freeform
 
     Additionally, for `time_range` (these specify both `since` and `until`):
-
+        - Today
         - Last day
         - Last week
         - Last month
+        - This month
         - Last quarter
         - Last year
         - No filter
@@ -1046,6 +1047,10 @@ def get_since_until(
     relative_start = parse_human_datetime(relative_start if relative_start else "today")
     relative_end = parse_human_datetime(relative_end if relative_end else "today")
     common_time_frames = {
+        "Today": (
+            relative_start,
+            parse_human_datetime('now') + relativedelta(hours=5, minutes=30)
+        ),
         "Last day": (
             relative_start - relativedelta(days=1),  # type: ignore
             relative_end,
@@ -1057,6 +1062,10 @@ def get_since_until(
         "Last month": (
             relative_start - relativedelta(months=1),  # type: ignore
             relative_end,
+        ),
+        "This month": (
+            relative_start.replace(day=1),  # noqa: T400
+            parse_human_datetime('now') + relativedelta(hours=5, minutes=30)
         ),
         "Last quarter": (
             relative_start - relativedelta(months=3),  # type: ignore
