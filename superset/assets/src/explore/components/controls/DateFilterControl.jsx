@@ -57,9 +57,11 @@ const RELATIVE_TIME_OPTIONS = Object.freeze({
   NEXT: 'Next',
 });
 const COMMON_TIME_FRAMES = [
+  'Today',
   'Last day',
   'Last week',
   'Last month',
+  'This month',
   'Last quarter',
   'Last year',
   'No filter',
